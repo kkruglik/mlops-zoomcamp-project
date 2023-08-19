@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client Churn Prediction</title>
+</head>
+<body>
+    <h1>Client Churn Prediction</h1>
+    <form id="churn-form" method="post" action="/predict">
+        <label for="customerID">customerID:</label>
+        <input type="text" id="customerID" name="customerID" required><br><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender" required>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select><br><br>
+
+        <label for="SeniorCitizen">Is Senior Citizen:</label>
+        <select id="SeniorCitizen" name="SeniorCitizen" required>
+            <option type="number" value=0>Senior</option>
+            <option type="number" value=1>Not Senior</option>
+        </select><br><br>
+
+        <label for="Partner">Partner:</label>
+        <select id="Partner" name="Partner" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="Dependents">Dependents:</label>
+        <select id="Dependents" name="Dependents" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <label for="tenure">Tenure:</label>
+        <input type="number" id="tenure" name="tenure" step="1" required><br><br>
+
+        <label for="PhoneService">Phone Service:</label>
+        <select id="PhoneService" name="PhoneService" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="MultipleLines">MultipleLines:</label>
+        <select id="MultipleLines" name="MultipleLines" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="InternetService">InternetService:</label>
+        <select id="InternetService" name="InternetService" required>
+            <option value="DSL">DSL</option>
+            <option value="Fiber optic">Fiber optic</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="OnlineSecurity">OnlineSecurity:</label>
+        <select id="OnlineSecurity" name="OnlineSecurity" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="OnlineBackup">OnlineBackup:</label>
+        <select id="OnlineBackup" name="OnlineBackup" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="DeviceProtection">DeviceProtection:</label>
+        <select id="DeviceProtection" name="DeviceProtection" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="TechSupport">TechSupport:</label>
+        <select id="TechSupport" name="TechSupport" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="StreamingTV">StreamingTV:</label>
+        <select id="StreamingTV" name="StreamingTV" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No">No internet service</option>
+        </select><br><br>
+
+        <label for="StreamingMovies">StreamingMovies:</label>
+        <select id="StreamingMovies" name="StreamingMovies" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            <option value="No">No internet service</option>
+        </select><br><br>
+
+        <label for="Contract">Contract:</label>
+        <select id="Contract" name="Contract" required>
+            <option value="Month-to-month">Month-to-month</option>
+            <option value="One year">One year</option>
+            <option value="Two year">Two year</option>
+        </select><br><br>
+
+        <label for="PaperlessBilling">PaperlessBilling:</label>
+        <select id="PaperlessBilling" name="PaperlessBilling" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="PaymentMethod">PaymentMethod:</label>
+        <select id="PaymentMethod" name="PaymentMethod" required>
+            <option value="Electronic check">Electronic check</option>
+            <option value="Mailed check">Mailed check</option>
+            <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+            <option value="Credit card (automatic)">Credit card (automatic)</option>
+        </select><br><br>
+
+        <label for="tenure">MonthlyCharges:</label>
+        <input type="number" id="MonthlyCharges" name="MonthlyCharges" step="1" required><br><br>
+
+        <label for="TotalCharges">TotalCharges:</label>
+        <input type="number" id="TotalCharges" name="TotalCharges" step="1" required><br><br>
+
+    </form>
+
+    <button type="button" id="predict-button">Predict Churn</button>
+
+    <p id="prediction-result-text"></p>
+
+    <script>
+    document.getElementById("predict-button").addEventListener("click", async function () {
+        const formData = {
+            customerID: document.getElementById("customerID").value,
+            gender: document.getElementById("gender").value,
+            SeniorCitizen: parseInt(document.getElementById("SeniorCitizen").value),
+            Partner: document.getElementById("Partner").value,
+            Dependents: document.getElementById("Dependents").value,
+            age: parseInt(document.getElementById("age").value),
+            tenure: parseInt(document.getElementById("tenure").value),
+            PhoneService: document.getElementById("PhoneService").value,
+            MultipleLines: document.getElementById("MultipleLines").value,
+            InternetService: document.getElementById("InternetService").value,
+            OnlineSecurity: document.getElementById("OnlineSecurity").value,
+            OnlineBackup: document.getElementById("OnlineBackup").value,
+            DeviceProtection: document.getElementById("DeviceProtection").value,
+            TechSupport: document.getElementById("TechSupport").value,
+            StreamingTV: document.getElementById("StreamingTV").value,
+            StreamingMovies: document.getElementById("StreamingMovies").value,
+            Contract: document.getElementById("Contract").value,
+            PaperlessBilling: document.getElementById("PaperlessBilling").value,
+            PaymentMethod: document.getElementById("PaymentMethod").value,
+            MonthlyCharges: parseFloat(document.getElementById("MonthlyCharges").value),
+            TotalCharges: parseFloat(document.getElementById("TotalCharges").value),
+        };
+
+        const response = await fetch("/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify([formData]), // Send as list of a single dict
+        });
+
+        const data = await response.json();
+        console.log(data);
+        const churnPrediction = data["predictions"][0];
+        console.log(churnPrediction);
+
+        let predictionText = "";
+        if (churnPrediction == 1) {
+            predictionText = `Model prediction ${churnPrediction}. User will churn.`;
+        } else {
+            predictionText = `Model prediction ${churnPrediction}. User will not churn.`;
+        }
+
+        document.getElementById("prediction-result-text").textContent = predictionText;
+    });
+</script>
+</body>
+</html>
