@@ -1,15 +1,24 @@
 FROM python:3.9
 
-COPY requirements.txt ./requirements.txt
+# Create and activate virtual environment
+RUN python3 -m venv /venv
+ENV PATH="/venv/bin:$PATH"
 
+# Set the working directory
+WORKDIR /app
+
+# Copy requirements file and install dependencies
+COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
-COPY .env .env
+# Copy the rest of the files
+COPY mlops-zoomcamp-390909-c59d401cfaeb.json /app/mlops-zoomcamp-390909-c59d401cfaeb.json
+COPY app /app/app
+COPY templates /app/templates
+COPY .env /app/.env
 
-COPY app app
-
-COPY templates templates
-
+# Expose port
 EXPOSE 8000
 
-CMD ["python3", "./app/main.py"]
+# Run the application
+CMD ["python", "./app/main.py"]
