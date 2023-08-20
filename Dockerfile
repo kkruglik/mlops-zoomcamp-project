@@ -15,7 +15,7 @@ RUN pip install --upgrade pip && pip install -r requirements.txt
 COPY secret.json /app/secret.json
 COPY app /app/app
 COPY templates /app/templates
-#COPY .env /app/.env
+COPY .env /app/.env
 
 # Expose port
 EXPOSE 8000
