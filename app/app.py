@@ -26,18 +26,15 @@ def show_form(request: Request):
     status_code=status.HTTP_200_OK,
     response_model=ChurnPredictionResponse,
 )
-def get_user_churn(users: List[UserInfo]):  # 
+def get_user_churn(users: List[UserInfo]):  #
     """
     Predict churn for a list of users
     """
-    print(users)
     users = [user.model_dump() for user in users]
     try:
         features = prepare_features(users)
     except ValueError as error:
-        raise HTTPException(
-            status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid features: {error}"
-        )
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail=f"Invalid features: {error}")
 
-    preds = model.predict(features).tolist()
-    return {"predictions": preds}
+    predictions = model.predict(features).tolist()
+    return {"predictions": predictions}

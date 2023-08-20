@@ -1,3 +1,5 @@
+""" Model for predicting user churn. """
+import os
 import mlflow
 import pickle
 import pandas as pd
@@ -6,6 +8,8 @@ from config import settings
 
 MODEL_REGISRTY_PATH = f"models:/{settings.model_name}/{settings.stage}"
 MLFLOW_URI = f"http://{settings.mlflow_host}:5000"
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "secret.json"
+
 
 mlflow.set_tracking_uri(MLFLOW_URI)
 

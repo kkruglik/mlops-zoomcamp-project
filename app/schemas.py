@@ -2,6 +2,9 @@ from pydantic import BaseModel
 
 
 class UserInfo(BaseModel):
+    """
+    User information
+    """
     customerID: str
     gender: str
     SeniorCitizen: int
@@ -25,4 +28,7 @@ class UserInfo(BaseModel):
 
 
 class ChurnPredictionResponse(BaseModel):
+    """
+    Response for churn prediction
+    """
     predictions: list[int]  # 0 or 1
