@@ -12,10 +12,10 @@ COPY requirements.txt /app/requirements.txt
 RUN pip install --upgrade pip && pip install -r requirements.txt
 
 # Copy the rest of the files
-COPY mlops-zoomcamp-390909-c59d401cfaeb.json /app/mlops-zoomcamp-390909-c59d401cfaeb.json
+COPY secret.json /app/secret.json
 COPY app /app/app
 COPY templates /app/templates
-COPY .env /app/.env
+#COPY .env /app/.env
 
 # Expose port
 EXPOSE 8000
